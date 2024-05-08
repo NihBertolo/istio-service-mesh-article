@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-client
+  labels:
+    app: ms-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-client
+  template:
+    metadata:
+      labels:
+        app: ms-client
+    spec:
+      containers:
+        - name: ms-client
+          image:  nihbertolo97/istioarticle:ms-client
+          ports:
+            - containerPort: 8080
+              name: http

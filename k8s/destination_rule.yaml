@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: httpstat-rule
+spec:
+  host: httpstat.us
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 100 
+      http:
+        http1MaxPendingRequests: 1 
+        maxRequestsPerConnection: 1 
+        maxRetries: 3 
+    outlierDetection:
+      consecutiveErrors: 3
+      interval: 5s
+      baseEjectionTime: 1m
+      maxEjectionPercent: 100
+      minHealthPercent: 0    

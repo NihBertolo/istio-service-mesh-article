@@ -1,0 +1,56 @@
+basePath: /api/v1
+definitions:
+  dto.JSONResponse:
+    properties:
+      code:
+        example: 200
+        type: integer
+      message:
+        example: Success
+        type: string
+      timestamp:
+        type: number
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: Aplicação desenvolvida para testes do circuit breaker.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Resiliência e Tolerância a Falhas com Istio
+  version: "1.0"
+paths:
+  /httpstats:
+    get:
+      consumes:
+      - application/json
+      description: Get httpstat response
+      parameters:
+      - description: Status de Resposta
+        format: int32
+        in: query
+        name: status
+        type: string
+      - description: Delay para resposta da API
+        format: delay
+        in: query
+        name: delay
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.JSONResponse'
+      summary: Proxy HTTPSTAT
+      tags:
+      - httpstat
+schemes:
+- http
+swagger: "2.0"

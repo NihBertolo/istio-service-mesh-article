@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: httpstat-us
+spec:
+  hosts:
+    - httpstat.us
+  http:
+    - route:
+        - destination:
+            host: httpstat.us
+      timeout: 5s
+      retries:
+        attempts: 3
+        perTryTimeout: 2s
+        retryOn: 5xx,connect-failure,refused-stream
