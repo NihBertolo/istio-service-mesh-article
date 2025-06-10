@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: ms-client
+  namespace: my-apps
+spec:
+  hosts:
+    - "nicolebertolo.com.br"
+  gateways:
+    - ms-client-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: ms-client-active
+            port:
+              number: 80
