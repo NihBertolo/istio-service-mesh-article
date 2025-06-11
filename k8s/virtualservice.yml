@@ -5,7 +5,7 @@ metadata:
   namespace: my-apps
 spec:
   hosts:
-    - "nicolebertolo.com.br"
+    - "*"
   gateways:
     - ms-client-gateway
   http:
