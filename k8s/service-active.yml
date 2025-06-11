@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-client-active
+  namespace: my-apps
+spec:
+  selector:
+    app: ms-client
+    rollouts-pod-template-hash: "" # Argo Rollouts vai setar dinamicamente
+  ports:
+    - port: 80
+      targetPort: 8080

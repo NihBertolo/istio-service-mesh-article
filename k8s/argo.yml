@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ms-client
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/NihBertolo/istio-service-mesh-article.git
+    targetRevision: tdc
+    path: ms-client
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-apps
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true

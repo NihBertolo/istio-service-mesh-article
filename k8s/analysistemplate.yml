@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: http-success-rate
+  namespace: my-apps
+spec:
+  metrics:
+    - name: http-success-rate
+      interval: 15s
+      count: 3
+      successCondition: result[0] >= 0.95
+      failureLimit: 1
+      provider:
+        prometheus:
+          address: http://prometheus-server.observability:80
+          query: |
+            sum(rate(http_requests_total{job="ms-client", status!~"5.."}[1m])) 
+            / 
+            sum(rate(http_requests_total{job="ms-client"}[1m]))
